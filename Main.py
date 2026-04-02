@@ -29,7 +29,7 @@ def ViewReview():
         output += '<tr><th><font size="3" color="black">Username</font></th>'
         output += '<th><font size="3" color="black">Review</font></th>'
         output += '<th><font size="3" color="black">Sentiment</font></th></tr>'
-        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
         index = 0
         with con:
             cur = con.cursor()
@@ -52,7 +52,7 @@ def ViewOrders():
         output += '<th><font size="3" color="black">Product Name</font></th>'
         output += '<th><font size="3" color="black">Amount</font></th>'
         output += '<th><font size="3" color="black">Purchase Date</font></th></tr>'
-        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
         index = 0
         with con:
             cur = con.cursor()
@@ -75,7 +75,7 @@ def CompleteOrder():
             now = datetime.datetime.now()
             current_time = now.strftime("%Y-%m-%d %H:%M:%S")
             status = "Error in cinfirming order"
-            db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+            db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
             db_cursor = db_connection.cursor()
             student_sql_query = "INSERT INTO purchaseorder(username,product_id,product_name,amount,transaction_date) VALUES('"+uname+"','"+product_id+"','"+product_name+"','"+str(predicted_price)+"','"+str(current_time)+"')"
             db_cursor.execute(student_sql_query)
@@ -101,7 +101,7 @@ def PostReviewAction():
             result = 'Negative'
         else :
             result = 'Neutral'
-        db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+        db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
         db_cursor = db_connection.cursor()
         student_sql_query = "INSERT INTO reviews(username,review,sentiment) VALUES('"+uname+"','"+review+"','"+result+"')"
         db_cursor.execute(student_sql_query)
@@ -190,6 +190,8 @@ def record():
 
 @app.route('/Chatbot', methods=['GET', 'POST'])
 def Chatbot():
+
+
     if request.method == 'GET':
         global original_price, predicted_price, final_price, product_name, product_id
         product_id = request.args.get('t1') #user will select product for which he want negotiate
@@ -273,7 +275,7 @@ def LoginAction():
     if request.method == 'POST':
         user = request.form['t1']
         password = request.form['t2']
-        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
         index = 0
         with con:
             cur = con.cursor()
@@ -300,7 +302,7 @@ def SignupAction():
         address = request.form['t5']
         gender = request.form['t6']
         status = "none"
-        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+        con = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
         with con:
             cur = con.cursor()
             cur.execute("select * FROM users")
@@ -310,7 +312,7 @@ def SignupAction():
                     status = user+" Username already exists"
                     break
         if status == 'none':
-            db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = 'root', database = 'negotiate',charset='utf8')
+            db_connection = pymysql.connect(host='127.0.0.1',port = 3306,user = 'root', password = '', database = 'negotiate',charset='utf8')
             db_cursor = db_connection.cursor()
             student_sql_query = "INSERT INTO users(username,password,contact_no,emailid,address,gender) VALUES('"+user+"','"+password+"','"+phone+"','"+email+"','"+address+"','"+gender+"')"
             db_cursor.execute(student_sql_query)
