@@ -168,8 +168,8 @@ def record():
         fh.close()
         path = os.path.abspath(os.getcwd())+'/static/audio/'
         print("====================="+path)
-        res = subprocess.check_output('ffmpeg -i '+path+'audio.wav '+path+'audio1.wav', shell=True)
-        with sr.WavFile(path+'audio1.wav') as source:
+        # res = subprocess.check_output('ffmpeg -i '+path+'audio.wav '+path+'audio1.wav', shell=True)
+        with sr.WavFile(path+'audio.wav') as source:
             audio = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio, language="en-IN")
