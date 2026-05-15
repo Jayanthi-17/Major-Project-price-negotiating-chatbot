@@ -1,8 +1,7 @@
-Flask==3.0.3
+Flask
 pandas==2.2.2
 numpy==1.26.4
-requests==2.32.3
-python-binance==1.0.19
-python-dotenv==1.0.1
-gunicorn==22.0.0
-websocket-client==1.8.0
+requests
+python-binance
+python-dotenv
+gunicorn
