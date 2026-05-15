@@ -123,6 +123,9 @@ def UserScreen():
     global uname
     return render_template('UserScreen.html', msg="Welcome "+uname)
 
+@app.route('/')
+def home():
+    return redirect(url_for('index'))
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
