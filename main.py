@@ -168,7 +168,7 @@ def record():
         fh.close()
         path = os.path.abspath(os.getcwd())+'/static/audio/'
         print("====================="+path)
-        res = subprocess.check_output(path+'ffmpeg.exe -i '+path+'audio.wav '+path+'audio1.wav', shell=True)
+        res = subprocess.check_output('ffmpeg -i '+path+'audio.wav '+path+'audio1.wav', shell=True)
         with sr.WavFile(path+'audio1.wav') as source:
             audio = recognizer.record(source)
         try:
@@ -331,7 +331,8 @@ def Logout():
 
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
 
 
 
